@@ -78,6 +78,7 @@ Group* ExtraMenu(Group* firstGroup, short int actionType) {
 		editGroup(firstGroup, number);
 		break;
 	case 4:
+		editStudent(firstGroup, number, name);
 		break;
 	case 5:
 		firstG = deleteGroup(firstGroup, number);
