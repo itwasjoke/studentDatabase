@@ -1,6 +1,7 @@
 #include "createFun.h"
 #include "structures.h"
 #include "genFunctions.h"
+#include "findFun.h"
 #include <iostream>
 using namespace std;
 Student* createStudentList() {
@@ -73,5 +74,11 @@ void createStudent(Group* firstGroup, int numberGroup, char nameStudent[50]) {
 	}
 	currentStudent->grant = grant;
 
+	Group* groupStud = findGroup(firstGroup, numberGroup);
+	Student* firstStudent = groupStud->first_student;
+	firstStudent->prev_student = currentStudent;
+	currentStudent->next_student = firstStudent;
+	groupStud->first_student = currentStudent;
 
+	printDatabase(firstGroup);
 }
