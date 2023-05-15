@@ -60,24 +60,24 @@ Group* ExtraMenu(Group* firstGroup, short int actionType) {
 		cin >> name;
 	}
 	else if (currentAction != 1) {
-		return firstGroup;
+		return firstG;
 	}
 	currentAction += actionType * 2;
 	switch (currentAction) {
 	case 1:
-		firstG = createGroup(firstGroup, number);
+		firstG = createGroup(firstG, number);
 		break;
 	case 2:
-		createStudent(firstGroup, number, name);
+		createStudent(firstG, number, name);
 		break;
 	case 3:
-		editGroup(firstGroup, number);
+		editGroup(firstG, number);
 		break;
 	case 4:
-		editStudent(firstGroup, number, name);
+		editStudent(firstG, number, name);
 		break;
 	case 5:
-		firstG = deleteGroup(firstGroup, number);
+		firstG = deleteGroup(firstG, number);
 		break;
 	case 6:
 		break;

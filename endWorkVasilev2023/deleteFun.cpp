@@ -1,5 +1,6 @@
 #include "deleteFun.h"
 #include "findFun.h"
+#include "genFunctions.h"
 #include <iostream>
 using namespace std;
 
@@ -7,10 +8,10 @@ Group* deleteDatabase(Group* firstGroup) {
 	return nullptr;
 }
 Group* deleteGroup(Group* firstGroup, int numberGroup) {
-	Group* deletedGroup;
+	Group* deletedGroup=nullptr;
 	Group* firstG = firstGroup;
 	deletedGroup = findGroup(firstGroup, numberGroup);
-	cout << "hi!";
+	if (deletedGroup == nullptr) return firstGroup;
 	if (deletedGroup == firstGroup) {
 		if (firstGroup->next_group == nullptr) {
 			firstG = nullptr;
@@ -19,11 +20,32 @@ Group* deleteGroup(Group* firstGroup, int numberGroup) {
 			firstG = firstGroup->next_group;
 		}
 	}
-	for (Student* i = deletedGroup->first_student; i != nullptr; i = i->next_student) {
-		Student* currentDeletedStudent = i;
-		delete currentDeletedStudent;
+	else {
+		if (deletedGroup->next_group == nullptr) {
+			deletedGroup->prev_group->next_group = nullptr;
+		}
+		else {
+			deletedGroup->next_group->prev_group = deletedGroup->prev_group;
+			deletedGroup->prev_group->next_group = deletedGroup->next_group;
+		}
 	}
-	delete deletedGroup;
+	Student* thisStudent = deletedGroup->first_student;
+	Student* nextStudent = nullptr;
+	Student* currentDeletedStudent = thisStudent;
+	if (thisStudent != nullptr) {
+		while (currentDeletedStudent) {
+			nextStudent = currentDeletedStudent->next_student;
+			//delete currentDeletedStudent;
+			currentDeletedStudent = nextStudent;
+		}
+		//for (Student* i = thisStudent; i != nullptr; i = i->next_student) {
+		//	Student* currentDeletedStudent = i;
+		//	delete currentDeletedStudent;
+		//}
+	}
+	
+	//delete deletedGroup;
+	printDatabase(firstG);
 	return firstG;
 }
 
