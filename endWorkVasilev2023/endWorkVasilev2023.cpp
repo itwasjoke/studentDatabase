@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 using namespace std;
 #include "globals.h"
 #include "structures.h"
@@ -7,7 +7,7 @@ using namespace std;
 #include "createFun.h"
 #include "editFun.h"
 #include "deleteFun.h"
-
+//ff
 
 Group* createDatabase() {
 	Group* firstGroup = nullptr;
