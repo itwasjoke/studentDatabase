@@ -2,6 +2,10 @@
 #include "findFun.h"
 #include <iostream>
 using namespace std;
+
+Group* deleteDatabase(Group* firstGroup) {
+	return nullptr;
+}
 Group* deleteGroup(Group* firstGroup, int numberGroup) {
 	Group* deletedGroup;
 	Group* firstG = firstGroup;

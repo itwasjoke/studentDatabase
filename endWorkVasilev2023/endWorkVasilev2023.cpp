@@ -7,7 +7,6 @@ using namespace std;
 #include "createFun.h"
 #include "editFun.h"
 #include "deleteFun.h"
-//ff
 
 Group* createDatabase() {
 	Group* firstGroup = nullptr;
@@ -42,9 +41,6 @@ Group* createDatabase() {
 	return firstGroup;
 }
 
-Group* deleteDatabase(Group* firstGroup) {
-	return nullptr;
-}
 
 Group* ExtraMenu(Group* firstGroup, short int actionType) {
 	clearConcole();

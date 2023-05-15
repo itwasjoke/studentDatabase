@@ -55,4 +55,6 @@ void editStudent(Group* firstGroup, int numberGroup, char studentName[50]) {
 		}
 		clearConcole();
 	}
+	clearConcole();
+	printDatabase(firstGroup);
 }
