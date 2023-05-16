@@ -15,6 +15,7 @@ Student* createStudentList() {
 	while (true) {
 		cout << "\nName: ";
 		cin >> currentName;
+		//cin.getline(currentName, SIZE_NAME);
 		if (currentName[0] == '0') {
 			break;
 		}
