@@ -125,6 +125,7 @@ void mainMenu(Group* firstGroup) {
 				break;
 			case 7:
 				currentGroups = ExtraMenu(currentGroups, 2);
+				break;
 			default:
 				showError();
 				break;

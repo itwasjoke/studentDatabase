@@ -4,9 +4,17 @@
 #include <iostream>
 using namespace std;
 
+void deleteThisStudent(Student* student) {
+	if (student) {
+		deleteThisStudent(student->next_student);
+		delete student;
+	}
+}
+
 Group* deleteDatabase(Group* firstGroup) {
 	return nullptr;
 }
+
 Group* deleteGroup(Group* firstGroup, int numberGroup) {
 	Group* deletedGroup=nullptr;
 	Group* firstG = firstGroup;
@@ -30,24 +38,12 @@ Group* deleteGroup(Group* firstGroup, int numberGroup) {
 		}
 	}
 	Student* thisStudent = deletedGroup->first_student;
-	Student* nextStudent = nullptr;
-	Student* currentDeletedStudent = thisStudent;
-	if (thisStudent != nullptr) {
-		while (currentDeletedStudent) {
-			nextStudent = currentDeletedStudent->next_student;
-			//delete currentDeletedStudent;
-			currentDeletedStudent = nextStudent;
-		}
-		//for (Student* i = thisStudent; i != nullptr; i = i->next_student) {
-		//	Student* currentDeletedStudent = i;
-		//	delete currentDeletedStudent;
-		//}
-	}
-	
-	//delete deletedGroup;
+	deleteThisStudent(thisStudent);
+	delete deletedGroup;
 	printDatabase(firstG);
 	return firstG;
 }
+
 
 
 void deleteStudent(Group* firstGroup, int numberGroup, char studentName) {
