@@ -80,6 +80,7 @@ Group* ExtraMenu(Group* firstGroup, short int actionType) {
 		firstG = deleteGroup(firstG, number);
 		break;
 	case 6:
+		deleteStudent(firstG, number, name);
 		break;
 	default:
 		showError();
