@@ -11,7 +11,16 @@ void deleteThisStudent(Student* student) {
 	}
 }
 
+void deleteThisGroup(Group* group) {
+	if (group) {
+		deleteThisStudent(group->first_student);
+		delete group;
+	}
+}
+
 Group* deleteDatabase(Group* firstGroup) {
+	deleteThisGroup(firstGroup);
+	cout << "database deleted.";
 	return nullptr;
 }
 

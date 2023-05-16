@@ -100,7 +100,7 @@ void mainMenu(Group* firstGroup) {
 			cout << "1 - enter the database\n2 - file of database\n";
 		}
 		else {
-			cout << "1 - enter the database\n2 - file of database\n3 - print the database\n4 - download database to file\n5 - add new data to database\n6 - edit info in database\n7 - delete data from database\n";
+			cout << "1 - enter the database\n2 - file of database\n3 - print the database\n4 - download database to file\n5 - add new data to database\n6 - edit info in database\n7 - delete data from database\n8 - delete database\n";
 		}
 		cin >> action;
 		clearConcole();
@@ -127,6 +127,9 @@ void mainMenu(Group* firstGroup) {
 			case 7:
 				currentGroups = ExtraMenu(currentGroups, 2);
 				break;
+			case 8:
+				currentGroups = deleteDatabase(currentGroups);
+				break;
 			default:
 				showError();
 				break;
@@ -148,6 +151,7 @@ void mainMenu(Group* firstGroup) {
 		pause();
 		clearConcole();
 	}
+	currentGroups = deleteDatabase(currentGroups);
 }
 
 int main() {
