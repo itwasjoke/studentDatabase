@@ -7,7 +7,7 @@ using namespace std;
 #include "createFun.h"
 #include "editFun.h"
 #include "deleteFun.h"
-
+#include <string> 
 Group* createDatabase() {
 	Group* firstGroup = nullptr;
 	Group* currentGroup = nullptr;
@@ -89,7 +89,7 @@ Group* ExtraMenu(Group* firstGroup, short int actionType) {
 	return firstG;
 }
 
-void mainMenu(Group* firstGroup) {
+void Menu(Group* firstGroup) {
 	int action = -1;
 	Group* currentGroups = firstGroup;
 	bool haveData;
@@ -112,11 +112,13 @@ void mainMenu(Group* firstGroup) {
 				printDatabase(currentGroups);
 				break;
 			case 2:
+				currentGroups = getDatabaseFromFile();
 				break;
 			case 3:
 				printDatabase(currentGroups);
 				break;
 			case 4:
+				saveDatabaseToFile(currentGroups);
 				break;
 			case 5:
 				currentGroups = ExtraMenu(currentGroups, 0);
@@ -142,6 +144,7 @@ void mainMenu(Group* firstGroup) {
 				printDatabase(currentGroups);
 				break;
 			case 2:
+				currentGroups = getDatabaseFromFile();
 				break;
 			default:
 				showError();
@@ -156,5 +159,6 @@ void mainMenu(Group* firstGroup) {
 
 int main() {
 	Group* firstGroup = nullptr;
-	mainMenu(firstGroup);
+	Menu(firstGroup);
+
 }

@@ -4,3 +4,4 @@ void showError();
 void pause();
 void clearConcole();
 void printDatabase(Group* firstG);
+void saveDatabaseToFile(Group* firstG);

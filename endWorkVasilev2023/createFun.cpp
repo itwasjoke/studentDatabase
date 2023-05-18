@@ -3,6 +3,8 @@
 #include "genFunctions.h"
 #include "findFun.h"
 #include <iostream>
+#include<fstream>
+#include "string"
 using namespace std;
 Student* createStudentList() {
 	Student* firstStudent = nullptr;
@@ -10,12 +12,12 @@ Student* createStudentList() {
 	Student* prevStudent = nullptr;
 
 	char currentName[SIZE_NAME];
-	int currentGrant;
+	int currentGrant=0;
 	cout << "\nAdd the students\n";
 	while (true) {
 		cout << "\nName: ";
-		cin >> currentName;
-		//cin.getline(currentName, SIZE_NAME);
+		cin.ignore();
+		cin.getline(currentName, SIZE_NAME);
 		if (currentName[0] == '0') {
 			break;
 		}
@@ -82,4 +84,27 @@ void createStudent(Group* firstGroup, int numberGroup, char nameStudent[50]) {
 	groupStud->first_student = currentStudent;
 
 	printDatabase(firstGroup);
+}
+Group* getDatabaseFromFile() {
+	Group* firstGroup=nullptr;
+	ifstream db("databaseSave.txt");
+	char name[SIZE_NAME];
+	string element;
+	int number;
+	int grant;
+	int marks[5];
+	while (db) {
+		getline(db, element);
+		char* elem = new char[element.length() + 1];
+		strcpy(elem, element.c_str());
+		//char* elem = element.data();
+		int firstLetter = elem[0] - 48;
+		if (firstLetter >= 0 && firstLetter <= 9) {
+			cout << element << "\n";
+		}
+		delete[] elem;
+	}
+	db.close();
+	pause();
+	return firstGroup;
 }

@@ -2,6 +2,7 @@
 #include <iostream>
 #include "globals.h"
 #include "structures.h"
+#include<fstream>
 using namespace std;
 void clearConcole() {
 	system("cls");
@@ -35,4 +36,28 @@ void printDatabase(Group* firstG) {
 			cout << "\n\n";
 		}
 	}
+}
+void saveDatabaseToFile(Group* firstG) {
+	ofstream db("databaseSave.txt");
+	clearConcole();
+	if (firstG == nullptr) {
+		cout << "Database is null\n";
+		return;
+	}
+	for (Group* i = firstG; i != nullptr; i = i->next_group) {
+		db << i->number << "\n";
+		if (i->first_student == nullptr) {
+			continue;
+		}
+		for (Student* j = i->first_student; j != nullptr; j = j->next_student) {
+			db << j->name << "\n";
+			db << j->grant << "\n";
+			for (int k = 0; k < 5; k++) {
+				db << j->marks[k] << " ";
+			}
+			db << "\n";
+		}
+	}
+	db.close();
+	cout << "Database saved\n";
 }
