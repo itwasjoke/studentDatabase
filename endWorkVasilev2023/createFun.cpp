@@ -87,24 +87,61 @@ void createStudent(Group* firstGroup, int numberGroup, char nameStudent[50]) {
 }
 Group* getDatabaseFromFile() {
 	Group* firstGroup=nullptr;
+	Group* prevGroup = nullptr;
+	Group* currentGroup = nullptr;
+	Student* prevStudent = nullptr;
+	Student* currentStudent = nullptr;
 	ifstream db("databaseSave.txt");
 	char name[SIZE_NAME];
 	string element;
 	int number;
 	int grant;
 	int marks[5];
+	bool b=true;
 	while (db) {
 		getline(db, element);
 		char* elem = new char[element.length() + 1];
-		strcpy(elem, element.c_str());
-		//char* elem = element.data();
+		strcpy_s(elem, element.length() + 1, element.c_str());
 		int firstLetter = elem[0] - 48;
-		if (firstLetter >= 0 && firstLetter <= 9) {
-			cout << element << "\n";
+		b = firstLetter >= 0 && firstLetter <= 9;
+		if (b) {
+			currentGroup = new Group;
+			currentGroup->first_student = nullptr;
+			currentGroup->number = atoi(elem);
+			if (firstGroup == nullptr) firstGroup = currentGroup;
+			if (prevGroup == nullptr) {
+				prevGroup = currentGroup;
+			}
+			else {
+				prevGroup->next_group = currentGroup;
+				currentGroup->prev_group = prevGroup;
+				prevGroup = currentGroup;
+			}
+			//cout << currentGroup->number << "\n";
+		}
+		else{
+			currentStudent = new Student;
+			for (int i = 0; i < element.length(); i++) {
+				currentStudent->name[i] = elem[i];
+			}
+			getline(db, element);
+			currentStudent->grant = stoi(element);
+			getline(db, element);
+			for (int i = 0; i < COUNT_MARKS; i++) {
+				currentStudent->marks[i] = element[i * 2]-48;
+			}
+			if (currentGroup->first_student == nullptr) {
+				currentGroup->first_student = currentStudent;
+			}
+			else {
+				prevStudent->next_student = currentStudent;
+				currentStudent->prev_student = prevStudent;
+			}
+			prevStudent = currentStudent;
 		}
 		delete[] elem;
 	}
 	db.close();
-	pause();
+	printDatabase(firstGroup);
 	return firstGroup;
 }
