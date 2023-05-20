@@ -1,11 +1,28 @@
-2381
-andrey vasilev
-444
+2391
+Andrey Vasilev
+1000
+4 5 4 5 4 
+Nikita Kadun
+4000
 5 5 5 5 5 
-fv
-445
-5 5 4 5 4 
-23
-selel
-443
-5 4 4 3 4 
+Yura Ivanov
+2500
+4 5 4 4 4 
+Maksim Savoshkin
+3000
+5 4 3 4 5 
+Viktor Petrunin
+4500
+5 5 5 5 5 
+Sergei Blohin
+4500
+5 5 5 5 5 
+Leonid Makrousov
+2000
+4 3 4 4 3 
+Valeria Globa
+3500
+4 5 4 4 5 
+Alina Kosonogova
+2500
+4 4 5 5 3 

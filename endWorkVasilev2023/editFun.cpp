@@ -6,6 +6,10 @@ using namespace std;
 void editGroup(Group* firstGroup, int numberGroup) {
 	int newNumber;
 	Group* editedGroup = findGroup(firstGroup, numberGroup);
+	if (editedGroup == nullptr) {
+		cout << "Group did not found.";
+		return;
+	}
 	cout << "Enter the new number of group: ";
 	cin >> newNumber;
 	editedGroup->number = newNumber;
@@ -19,6 +23,10 @@ void printDataAboutStudent(Student* student) {
 void editStudent(Group* firstGroup, int numberGroup, char studentName[50]) {
 	clearConcole();
 	Student* editedStud = findStudent(firstGroup, numberGroup, studentName);
+	if (editedStud == nullptr) {
+		cout << "Student did not found.";
+		return;
+	}
 	short int action=-1;
 	while (true) {
 		printDataAboutStudent(editedStud);
@@ -36,6 +44,7 @@ void editStudent(Group* firstGroup, int numberGroup, char studentName[50]) {
 			cout << "Enter new name: ";
 			char newName[50];
 			cin >> newName;
+			memset(editedStud->name, 0, 50);
 			for (int i = 0; i < 50; i++) editedStud->name[i] = newName[i];
 			break;
 		case 2:

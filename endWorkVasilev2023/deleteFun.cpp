@@ -28,6 +28,10 @@ Group* deleteGroup(Group* firstGroup, int numberGroup) {
 	Group* deletedGroup=nullptr;
 	Group* firstG = firstGroup;
 	deletedGroup = findGroup(firstGroup, numberGroup);
+	if (deletedGroup == nullptr) {
+		cout << "Group did not found.";
+		return firstGroup;
+	}
 	if (deletedGroup) {
 		if (deletedGroup == firstGroup) {
 			if (firstGroup->next_group) {
@@ -62,6 +66,10 @@ Group* deleteGroup(Group* firstGroup, int numberGroup) {
 void deleteStudent(Group* firstGroup, int numberGroup, char studentName[50]) {
 	Group* studentGroup = findGroup(firstGroup, numberGroup);
 	Student* deletedStudent = findStudent(firstGroup, numberGroup, studentName);
+	if (deletedStudent == nullptr) {
+		cout << "Student did not found.";
+		return;
+	}
 	if (deletedStudent) {
 		if (studentGroup->first_student == deletedStudent) {
 			studentGroup->first_student = deletedStudent->next_student;

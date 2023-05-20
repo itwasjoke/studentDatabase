@@ -66,6 +66,7 @@ Group* createGroup(Group* firstGroup, int numberGroup) {
 void createStudent(Group* firstGroup, int numberGroup, char nameStudent[50]) {
 	int grant;
 	Student* currentStudent = new Student;
+	memset(currentStudent->name, 0, 50);
 	cout << "Grant: ";
 	cin >> grant;
 	cout << "Add five marks: ";
@@ -86,26 +87,24 @@ void createStudent(Group* firstGroup, int numberGroup, char nameStudent[50]) {
 	printDatabase(firstGroup);
 }
 Group* getDatabaseFromFile() {
-	Group* firstGroup=nullptr;
+	Group* firstGroup = nullptr;
 	Group* prevGroup = nullptr;
 	Group* currentGroup = nullptr;
 	Student* prevStudent = nullptr;
 	Student* currentStudent = nullptr;
 	ifstream db("databaseSave.txt");
-	char name[SIZE_NAME];
 	string element;
-	int number;
-	int grant;
-	int marks[5];
-	bool b=true;
+	bool b = true;
 	while (db) {
 		getline(db, element);
+		if (element == "") break;
 		char* elem = new char[element.length() + 1];
 		strcpy_s(elem, element.length() + 1, element.c_str());
-		int firstLetter = elem[0] - 48;
+		int firstLetter = elem[0]-48;
 		b = firstLetter >= 0 && firstLetter <= 9;
 		if (b) {
 			currentGroup = new Group;
+			currentGroup->next_group = nullptr;
 			currentGroup->first_student = nullptr;
 			currentGroup->number = atoi(elem);
 			if (firstGroup == nullptr) firstGroup = currentGroup;
@@ -117,10 +116,10 @@ Group* getDatabaseFromFile() {
 				currentGroup->prev_group = prevGroup;
 				prevGroup = currentGroup;
 			}
-			//cout << currentGroup->number << "\n";
 		}
-		else{
+		else {
 			currentStudent = new Student;
+			memset(currentStudent->name, 0, 50);
 			for (int i = 0; i < element.length(); i++) {
 				currentStudent->name[i] = elem[i];
 			}
@@ -128,14 +127,16 @@ Group* getDatabaseFromFile() {
 			currentStudent->grant = stoi(element);
 			getline(db, element);
 			for (int i = 0; i < COUNT_MARKS; i++) {
-				currentStudent->marks[i] = element[i * 2]-48;
+				currentStudent->marks[i] = element[i * 2] - 48;
 			}
+			currentStudent->next_student = nullptr;
 			if (currentGroup->first_student == nullptr) {
 				currentGroup->first_student = currentStudent;
 			}
 			else {
 				prevStudent->next_student = currentStudent;
 				currentStudent->prev_student = prevStudent;
+				currentStudent->next_student = nullptr;
 			}
 			prevStudent = currentStudent;
 		}

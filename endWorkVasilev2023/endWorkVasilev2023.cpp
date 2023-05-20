@@ -53,11 +53,14 @@ Group* ExtraMenu(Group* firstGroup, short int actionType) {
 	char name[50];
 	cin >> currentAction;
 	clearConcole();
+	printDatabase(firstG);
 	cout << "Enter the number of the group: ";
 	cin >> number;
 	if (currentAction == 2) {
 		cout << "Enter the name of the student: ";
-		cin >> name;
+		memset(name, 0, 50);
+		cin.ignore();
+		cin.getline(name, SIZE_NAME);
 	}
 	else if (currentAction != 1) {
 		return firstG;
@@ -97,15 +100,20 @@ void Menu(Group* firstGroup) {
 		haveData = true;
 		if (currentGroups == nullptr) {
 			haveData = false;
-			cout << "1 - enter the database\n2 - file of database\n";
+			cout << "\n 1 - enter the database\n 2 - file of database\n ";
 		}
 		else {
-			cout << "1 - enter the database\n2 - file of database\n3 - print the database\n4 - download database to file\n5 - add new data to database\n6 - edit info in database\n7 - delete data from database\n8 - delete database\n";
+			printDatabase(currentGroups);
+			cout << "\n 1 - enter the database\n 2 - file of database\n 3 - print the database\n 4 - download database to file\n 5 - add new data to database\n 6 - edit info in database\n 7 - delete data from database\n 8 - delete database\n 0 - exit\n ";
 		}
 		cin >> action;
 		clearConcole();
 		if (haveData) {
 			switch (action) {
+			case 0:
+				currentGroups = deleteDatabase(currentGroups);
+				return;
+				break;
 			case 1:
 				currentGroups = deleteDatabase(currentGroups);
 				currentGroups = createDatabase();
