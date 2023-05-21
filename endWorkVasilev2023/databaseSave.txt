@@ -1,3 +1,31 @@
+2392
+Nikolai Monastirev
+4500
+5 5 5 5 5 
+Ekaterina Kuznecova
+4000
+5 5 5 4 3 
+Michail Lermontov
+5600
+5 5 5 5 5 
+Oleg Ejkov
+10000
+5 5 5 4 5 
+Sergei Montain
+3000
+5 5 5 5 5 
+Nikita Lemonadov
+4999
+5 5 5 5 5 
+Vadim Rusak
+0
+3 2 2 3 2 
+Vadim Gorin
+1000
+3 3 4 4 3 
+Matvei Kursav
+5000
+5 4 3 4 5 
 2391
 Andrey Vasilev
 1000

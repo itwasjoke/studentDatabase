@@ -16,14 +16,15 @@ void pause() {
 	while (cin.get() != '\n');
 }
 void showError() {
-	cout << "Error in the program";
+	cout << "\n Error in the program";
 }
 void printDatabase(Group* firstG) {
 	int count = 0;
 	int maxSizeName = 0;
 	clearConcole();
+	cout << "  Coursework / Andrey Vasilev / ETU University / 2023 \n  This is a database of stream students\n";
 	if (firstG == nullptr) {
-		cout << "Database is null\n";
+		cout << "\n Database is null\n";
 		return;
 	}
 	cout << "\n  Database\n\n";
@@ -105,6 +106,7 @@ void showStatistics(Group* firstGroup) {
 	int checksum = 0;
 	int countE = 0;
 	for (Group* i = firstGroup; i != nullptr; i = i->next_group) {
+		if (i->first_student == nullptr) break;
 		for (Student* j = i->first_student; j != nullptr; j = j->next_student) {
 			checksum = 0;
 			for (int k = 0; k < COUNT_MARKS; k++) {
@@ -115,6 +117,11 @@ void showStatistics(Group* firstGroup) {
 			}
 		}
 	}
+	if (countE == 0) {
+		cout << "\n No honors students in the database.\n ";
+		return;
+	}
+	printDatabase(firstGroup);
 	char** excellentSt = new char* [countE];
 	char currentSt[SIZE_NAME];
 	countE = 0;
@@ -151,6 +158,11 @@ void showStatistics(Group* firstGroup) {
 			}
 		}
 	}
+	if (countE == 0) {
+		clearConcole();
+		cout << "\n No students were found with this combination of letters.\n ";
+		return;
+	}
 	for (int i = 0; i < countE - 1; i++) {
 		for (int j = i + 1; j < countE; j++) {
 			if (strcmp(excellentSt[i], excellentSt[j]) > 0)
@@ -164,6 +176,7 @@ void showStatistics(Group* firstGroup) {
 	for (int i = 0; i < countE; ++i)
 	{
 		cout << " " << i+1 << "\t" << excellentSt[i] << endl;
+		delete excellentSt[i];
 	}
-
+	delete[] excellentSt;
 }
