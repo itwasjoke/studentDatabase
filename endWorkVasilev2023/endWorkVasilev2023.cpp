@@ -15,9 +15,9 @@ Group* createDatabase() {
 
 	int currentNumber = -1;
 
-	cout << "Create database\n\n";
+	cout << "\n Create database\n\n";
 	while (true) {
-		cout << "Create new group\nEnter the number: ";
+		cout << " Create new group\n Enter the number: ";
 		cin >> currentNumber;
 		if (currentNumber == 0) {
 			break;
@@ -46,7 +46,7 @@ Group* ExtraMenu(Group* firstGroup, short int actionType) {
 	clearConcole();
 	Group* firstG = firstGroup;
 	string info[3] = { "add new","edit", "delete" };
-	cout << "1 - " << info[actionType] << " group\n2 - " << info[actionType] << " student\n";
+	cout << "\n 1 - " << info[actionType] << " group\n 2 - " << info[actionType] << " student\n ";
 
 	short int currentAction = -1;
 	int number;
@@ -54,10 +54,10 @@ Group* ExtraMenu(Group* firstGroup, short int actionType) {
 	cin >> currentAction;
 	clearConcole();
 	printDatabase(firstG);
-	cout << "Enter the number of the group: ";
+	cout << "\n\n Enter the number of the group: ";
 	cin >> number;
 	if (currentAction == 2) {
-		cout << "Enter the name of the student: ";
+		cout << "\n Enter the name of the student: ";
 		memset(name, 0, 50);
 		cin.ignore();
 		cin.getline(name, SIZE_NAME);
@@ -104,10 +104,11 @@ void Menu(Group* firstGroup) {
 		}
 		else {
 			printDatabase(currentGroups);
-			cout << "\n 1 - enter the database\n 2 - file of database\n 3 - print the database\n 4 - download database to file\n 5 - add new data to database\n 6 - edit info in database\n 7 - delete data from database\n 8 - delete database\n 0 - exit\n ";
+			cout << "\n 1 - enter the database\n 2 - file of database\n 3 - print the database\n 4 - download database to file\n 5 - add new data to database\n 6 - edit info in database\n 7 - delete data from database\n 8 - delete database\n 9 - show statistics\n 0 - exit\n ";
 		}
 		cin >> action;
 		clearConcole();
+		bool b = true;
 		if (haveData) {
 			switch (action) {
 			case 0:
@@ -117,10 +118,11 @@ void Menu(Group* firstGroup) {
 			case 1:
 				currentGroups = deleteDatabase(currentGroups);
 				currentGroups = createDatabase();
-				printDatabase(currentGroups);
+				b = false;
 				break;
 			case 2:
 				currentGroups = getDatabaseFromFile();
+				b = false;
 				break;
 			case 3:
 				printDatabase(currentGroups);
@@ -140,6 +142,9 @@ void Menu(Group* firstGroup) {
 			case 8:
 				currentGroups = deleteDatabase(currentGroups);
 				break;
+			case 9:
+				showStatistics(currentGroups);
+				break;
 			default:
 				showError();
 				break;
@@ -149,17 +154,18 @@ void Menu(Group* firstGroup) {
 			switch (action) {
 			case 1:
 				currentGroups = createDatabase();
-				printDatabase(currentGroups);
+				b = false;
 				break;
 			case 2:
 				currentGroups = getDatabaseFromFile();
+				b = false;
 				break;
 			default:
 				showError();
 				break;
 			}
 		}
-		pause();
+		if (b) pause();
 		clearConcole();
 	}
 	currentGroups = deleteDatabase(currentGroups);

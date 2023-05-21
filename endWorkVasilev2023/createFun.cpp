@@ -13,15 +13,15 @@ Student* createStudentList() {
 
 	char currentName[SIZE_NAME];
 	int currentGrant=0;
-	cout << "\nAdd the students\n";
+	cout << "\n Add the students\n";
 	while (true) {
-		cout << "\nName: ";
+		cout << "\n Name: ";
 		cin.ignore();
 		cin.getline(currentName, SIZE_NAME);
 		if (currentName[0] == '0') {
 			break;
 		}
-		cout << "Grant: ";
+		cout << " Grant: ";
 		cin >> currentGrant;
 
 		currentStudent = new Student;
@@ -33,7 +33,7 @@ Student* createStudentList() {
 			currentStudent->prev_student = prevStudent;
 			prevStudent->next_student = currentStudent;
 		}
-		cout << "Add five marks: ";
+		cout << " Add five marks: ";
 		for (int i = 0; i < COUNT_MARKS; i++) {
 			cin >> currentStudent->marks[i];
 		}
@@ -67,9 +67,9 @@ void createStudent(Group* firstGroup, int numberGroup, char nameStudent[50]) {
 	int grant;
 	Student* currentStudent = new Student;
 	memset(currentStudent->name, 0, 50);
-	cout << "Grant: ";
+	cout << " Grant: ";
 	cin >> grant;
-	cout << "Add five marks: ";
+	cout << " Add five marks: ";
 	for (int i = 0; i < COUNT_MARKS; i++) {
 		cin >> currentStudent->marks[i];
 	}
@@ -143,6 +143,5 @@ Group* getDatabaseFromFile() {
 		delete[] elem;
 	}
 	db.close();
-	printDatabase(firstGroup);
 	return firstGroup;
 }

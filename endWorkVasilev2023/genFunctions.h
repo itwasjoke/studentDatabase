@@ -5,3 +5,4 @@ void pause();
 void clearConcole();
 void printDatabase(Group* firstG);
 void saveDatabaseToFile(Group* firstG);
+void showStatistics(Group* firstGroup);
