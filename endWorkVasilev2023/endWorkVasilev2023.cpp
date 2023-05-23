@@ -31,7 +31,7 @@ Group* createDatabase() {
 			prevGroup->next_group = currentGroup;
 		}
 		currentGroup->number = currentNumber;
-		currentGroup->first_student = createStudentList();
+		currentGroup->first_student = createStudentList(firstGroup,currentNumber);
 		currentGroup->next_group = nullptr;
 		prevGroup = currentGroup;
 		clearConcole();
@@ -50,15 +50,21 @@ Group* ExtraMenu(Group* firstGroup, short int actionType) {
 
 	short int currentAction = -1;
 	int number;
-	char name[50];
+	char name[SIZE_NAME];
 	cin >> currentAction;
 	clearConcole();
 	printDatabase(firstG);
 	cout << "\n\n Enter the number of the group: ";
 	cin >> number;
+	if (!groupExist(firstGroup, number) && currentAction!=1) {
+		clearConcole();
+		cout << "\n Error\n The group does not exist\n ";
+		pause();
+		return firstG;
+	}
 	if (currentAction == 2) {
 		cout << "\n Enter the name of the student: ";
-		memset(name, 0, 50);
+		memset(name, 0, SIZE_NAME);
 		cin.ignore();
 		cin.getline(name, SIZE_NAME);
 	}
@@ -134,12 +140,15 @@ void Menu(Group* firstGroup) {
 				break;
 			case 5:
 				currentGroups = ExtraMenu(currentGroups, 0);
+				b = false;
 				break;
 			case 6:
 				currentGroups = ExtraMenu(currentGroups, 1);
+				b = false;
 				break;
 			case 7:
 				currentGroups = ExtraMenu(currentGroups, 2);
+				b = false;
 				break;
 			case 8:
 				currentGroups = deleteDatabase(currentGroups);

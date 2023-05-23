@@ -1,4 +1,5 @@
 #pragma once
 #include "structures.h"
-Student* findStudent(Group* firstGroup, int numberGroup, char studentName[50]);
+bool groupExist(Group* firstGroup, int number);
+Student* findStudent(Group* firstGroup, int numberGroup, char studentName[SIZE_NAME]);
 Group* findGroup(Group* firstGroup, int numberGroup);

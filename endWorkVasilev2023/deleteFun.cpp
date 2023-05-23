@@ -20,7 +20,7 @@ void deleteThisGroup(Group* group) {
 
 Group* deleteDatabase(Group* firstGroup) {
 	deleteThisGroup(firstGroup);
-	cout << "database deleted.";
+	cout << "\n Database deleted.\n ";
 	return nullptr;
 }
 
@@ -29,7 +29,7 @@ Group* deleteGroup(Group* firstGroup, int numberGroup) {
 	Group* firstG = firstGroup;
 	deletedGroup = findGroup(firstGroup, numberGroup);
 	if (deletedGroup == nullptr) {
-		cout << "Group did not found.";
+		cout << "\n Group did not found.\n ";
 		return firstGroup;
 	}
 	if (deletedGroup) {
@@ -53,21 +53,20 @@ Group* deleteGroup(Group* firstGroup, int numberGroup) {
 		Student* thisStudent = deletedGroup->first_student;
 		deleteThisStudent(thisStudent);
 		delete deletedGroup;
-		printDatabase(firstG);
 		return firstG;
 	}
 	else {
-		cout << "Not found.";
+		cout << "\n Not found.\n ";
 		return firstGroup;
 	}
 	
 }
 
-void deleteStudent(Group* firstGroup, int numberGroup, char studentName[50]) {
+void deleteStudent(Group* firstGroup, int numberGroup, char studentName[SIZE_NAME]) {
 	Group* studentGroup = findGroup(firstGroup, numberGroup);
 	Student* deletedStudent = findStudent(firstGroup, numberGroup, studentName);
 	if (deletedStudent == nullptr) {
-		cout << "Student did not found.";
+		cout << "\n Student did not found.\n ";
 		return;
 	}
 	if (deletedStudent) {
@@ -85,9 +84,8 @@ void deleteStudent(Group* firstGroup, int numberGroup, char studentName[50]) {
 			}
 		}
 		delete deletedStudent;
-		printDatabase(firstGroup);
 	}
 	else {
-		cout << "Not found.";
+		cout << "\n Not found.\n ";
 	}
 }

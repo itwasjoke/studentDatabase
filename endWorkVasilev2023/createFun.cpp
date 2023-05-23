@@ -2,25 +2,28 @@
 #include "structures.h"
 #include "genFunctions.h"
 #include "findFun.h"
+#include "globals.h"
 #include <iostream>
 #include<fstream>
 #include "string"
 using namespace std;
-Student* createStudentList() {
+
+Student* createStudentList(Group* firstGroup, int numberGroup) {
 	Student* firstStudent = nullptr;
 	Student* currentStudent = nullptr;
 	Student* prevStudent = nullptr;
-
 	char currentName[SIZE_NAME];
 	int currentGrant=0;
 	cout << "\n Add the students\n";
 	while (true) {
 		cout << "\n Name: ";
+		memset(currentName, 0, SIZE_NAME);
 		cin.ignore();
 		cin.getline(currentName, SIZE_NAME);
 		if (currentName[0] == '0') {
 			break;
 		}
+		Student* existStudent = nullptr;
 		cout << " Grant: ";
 		cin >> currentGrant;
 
@@ -37,6 +40,7 @@ Student* createStudentList() {
 		for (int i = 0; i < COUNT_MARKS; i++) {
 			cin >> currentStudent->marks[i];
 		}
+		memset(currentStudent->name, 0, SIZE_NAME);
 		for (int i = 0; i < SIZE_NAME; i++) {
 			currentStudent->name[i] = currentName[i];
 		}
@@ -44,7 +48,6 @@ Student* createStudentList() {
 		currentStudent->next_student = nullptr;
 		prevStudent = currentStudent;
 	}
-
 	return firstStudent;
 }
 Group* createGroup(Group* firstGroup, int numberGroup) {
@@ -53,20 +56,31 @@ Group* createGroup(Group* firstGroup, int numberGroup) {
 		showError();
 		return nullptr;
 	}
+	if (groupExist(firstGroup, numberGroup)) {
+		clearConcole();
+		cout << "\n Error\n A group with this number already exists in database\n ";
+		pause();
+		return firstG;
+	}
 	Group* newGroup = new Group;
 	newGroup->number = numberGroup;
 	newGroup->prev_group = nullptr;
 	newGroup->next_group = firstG;
 	firstG->prev_group = newGroup;
-	newGroup->first_student = createStudentList();
-	printDatabase(newGroup);
+	newGroup->first_student = createStudentList(firstGroup,numberGroup);
 	return newGroup;
 }
 
-void createStudent(Group* firstGroup, int numberGroup, char nameStudent[50]) {
+void createStudent(Group* firstGroup, int numberGroup, char nameStudent[SIZE_NAME]) {
+	if (findStudent(firstGroup, numberGroup, nameStudent) != nullptr) {
+		clearConcole();
+		cout << "\n\n Error\n A student with this name already exists in this group\n ";
+		pause();
+		return;
+	}
 	int grant;
 	Student* currentStudent = new Student;
-	memset(currentStudent->name, 0, 50);
+	memset(currentStudent->name, 0, SIZE_NAME);
 	cout << " Grant: ";
 	cin >> grant;
 	cout << " Add five marks: ";
@@ -83,8 +97,6 @@ void createStudent(Group* firstGroup, int numberGroup, char nameStudent[50]) {
 	firstStudent->prev_student = currentStudent;
 	currentStudent->next_student = firstStudent;
 	groupStud->first_student = currentStudent;
-
-	printDatabase(firstGroup);
 }
 Group* getDatabaseFromFile() {
 	Group* firstGroup = nullptr;
@@ -119,7 +131,7 @@ Group* getDatabaseFromFile() {
 		}
 		else {
 			currentStudent = new Student;
-			memset(currentStudent->name, 0, 50);
+			memset(currentStudent->name, 0, SIZE_NAME);
 			for (int i = 0; i < element.length(); i++) {
 				currentStudent->name[i] = elem[i];
 			}

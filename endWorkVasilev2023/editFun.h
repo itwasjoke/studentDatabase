@@ -1,4 +1,4 @@
 #pragma once
 #include "structures.h"
 void editGroup(Group* firstGroup, int numberGroup);
-void editStudent(Group* firstGroup, int numberGroup, char studentName[50]);
+void editStudent(Group* firstGroup, int numberGroup, char studentName[SIZE_NAME]);

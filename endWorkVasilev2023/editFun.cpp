@@ -1,38 +1,38 @@
 #include "editFun.h"
 #include "genFunctions.h"
 #include "findFun.h"
+#include "globals.h"
 #include <iostream>
 using namespace std;
 void editGroup(Group* firstGroup, int numberGroup) {
 	int newNumber;
 	Group* editedGroup = findGroup(firstGroup, numberGroup);
 	if (editedGroup == nullptr) {
-		cout << "Group did not found.";
+		cout << "\n Group did not found.\n ";
 		return;
 	}
-	cout << "Enter the new number of group: ";
+	cout << "\n Enter the new number of group: ";
 	cin >> newNumber;
 	editedGroup->number = newNumber;
-	printDatabase(firstGroup);
 }
 void printDataAboutStudent(Student* student) {
-	cout << "Name: " << student->name << "\nGrant: " << student->grant << "\nMakrs: ";
-	for (int i = 0; i < 5; i++) cout << student->marks[i] << " ";
+	cout << "\n Name: " << student->name << "\n Grant: " << student->grant << "\n Marks: ";
+	for (int i = 0; i < COUNT_MARKS; i++) cout << student->marks[i] << " ";
 	cout << "\n";
 }
-void editStudent(Group* firstGroup, int numberGroup, char studentName[50]) {
+void editStudent(Group* firstGroup, int numberGroup, char studentName[SIZE_NAME]) {
 	clearConcole();
 	Student* editedStud = findStudent(firstGroup, numberGroup, studentName);
 	if (editedStud == nullptr) {
-		cout << "Student did not found.";
+		cout << "\n Student did not found.\n ";
 		return;
 	}
 	short int action=-1;
 	while (true) {
 		printDataAboutStudent(editedStud);
 
-		cout << "\nWhat do you want to edit?\n";
-		cout << "1 - edit name\n2 - edit grant\n3 - edit marks\n0 - exit\n";
+		cout << "\n What do you want to edit?\n";
+		cout << " 1 - edit name\n 2 - edit grant\n 3 - edit marks\n 0 - exit\n ";
 		cin >> action;
 		if (action == 0) break;
 		clearConcole();
@@ -41,21 +41,23 @@ void editStudent(Group* firstGroup, int numberGroup, char studentName[50]) {
 		switch (action)
 		{
 		case 1:
-			cout << "Enter new name: ";
-			char newName[50];
-			cin >> newName;
-			memset(editedStud->name, 0, 50);
-			for (int i = 0; i < 50; i++) editedStud->name[i] = newName[i];
+			cout << " Enter new name: ";
+			char newName[SIZE_NAME];
+			memset(newName, 0, SIZE_NAME);
+			cin.ignore();
+			cin.getline(newName, SIZE_NAME);
+			memset(editedStud->name, 0, SIZE_NAME);
+			for (int i = 0; i < SIZE_NAME; i++) editedStud->name[i] = newName[i];
 			break;
 		case 2:
-			cout << "Enter new grant: ";
+			cout << " Enter new grant: ";
 			int newGrant;
 			cin >> newGrant;
 			editedStud->grant = newGrant;
 			break;
 		case 3:
-			cout << "Enter new marks: ";
-			for (int i = 0; i < 5; i++) {
+			cout << " Enter new marks: ";
+			for (int i = 0; i < COUNT_MARKS; i++) {
 				cin >> editedStud->marks[i];
 			}
 			break;
@@ -65,5 +67,4 @@ void editStudent(Group* firstGroup, int numberGroup, char studentName[50]) {
 		clearConcole();
 	}
 	clearConcole();
-	printDatabase(firstGroup);
 }

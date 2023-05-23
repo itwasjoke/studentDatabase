@@ -16,7 +16,8 @@ void pause() {
 	while (cin.get() != '\n');
 }
 void showError() {
-	cout << "\n Error in the program";
+	cout << "\n Error\n ";
+	pause();
 }
 void printDatabase(Group* firstG) {
 	int count = 0;
@@ -43,7 +44,7 @@ void printDatabase(Group* firstG) {
 		}
 	}
 	maxSizeName += 2;
-	cout << " #" << "\tGroup\tName";
+	cout << "  #" << "\tGroup\tName";
 	for (int i = 0; i < maxSizeName-1;i++) {
 		cout << "\t";
 	}
@@ -63,7 +64,7 @@ void printDatabase(Group* firstG) {
 			sizeName = sizeName;
 			sizeName /= 8;
 			sizeName = maxSizeName - sizeName-1;
-			cout <<" " << count << "\t" << i->number << "\t" << j->name;
+			cout <<"  " << count << "\t" << i->number << "\t" << j->name;
 			for (int k = 0; k < sizeName; k++) {
 				cout << "\t";
 			}
@@ -80,7 +81,7 @@ void saveDatabaseToFile(Group* firstG) {
 	ofstream db("databaseSave.txt");
 	clearConcole();
 	if (firstG == nullptr) {
-		cout << "Database is null\n";
+		cout << "\n Database is null\n";
 		return;
 	}
 	for (Group* i = firstG; i != nullptr; i = i->next_group) {
@@ -91,14 +92,14 @@ void saveDatabaseToFile(Group* firstG) {
 		for (Student* j = i->first_student; j != nullptr; j = j->next_student) {
 			db << j->name << "\n";
 			db << j->grant << "\n";
-			for (int k = 0; k < 5; k++) {
+			for (int k = 0; k < COUNT_MARKS; k++) {
 				db << j->marks[k] << " ";
 			}
 			db << "\n";
 		}
 	}
 	db.close();
-	cout << "Database saved\n";
+	cout << "\n Database saved\n";
 }
 
 
@@ -126,7 +127,7 @@ void showStatistics(Group* firstGroup) {
 	char currentSt[SIZE_NAME];
 	countE = 0;
 	char letters[SIZE_NAME];
-	memset(letters, 0, 50);
+	memset(letters, 0, SIZE_NAME);
 	cout << "\n Enter the letters that begin with the last names of the honors students: ";
 	cin.ignore();
 	cin.getline(letters, SIZE_NAME);
